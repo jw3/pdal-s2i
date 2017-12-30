@@ -20,6 +20,11 @@ COPY s2i/bin/ /usr/libexec/s2i
 RUN mkdir /opt/app-root \
  && chown -R 1001:1001 /opt/app-root
 
+COPY purge.sh /tmp
+
+RUN /tmp/purge.sh \
+ && rm -rf /tmp/*
+
 USER 1001
 
 CMD ["/usr/libexec/s2i/usage"]
